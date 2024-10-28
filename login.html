@@ -1,0 +1,37 @@
+<!-- login.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login - Note-Taking App</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="login-container">
+    <h2>Login</h2>
+    <input type="text" id="username" placeholder="Username">
+    <input type="password" id="password" placeholder="Password">
+    <button onclick="login()">Login</button>
+    <p>Don't have an account? <a href="register.html">Register here</a>.</p>
+  </div>
+  <script>
+    function login() {
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value;
+      let users = JSON.parse(localStorage.getItem('users')) || {};
+
+      if (!username || !password) {
+        alert('Please enter username and password.');
+        return;
+      }
+
+      if (users[username] && users[username].password === password) {
+        localStorage.setItem('currentUser', username);
+        window.location.href = 'index.html';
+      } else {
+        alert('Invalid username or password.');
+      }
+    }
+  </script>
+</body>
+</html>

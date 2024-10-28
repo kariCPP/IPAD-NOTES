@@ -1,0 +1,85 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Advanced Note-Taking App</title>
+  <link rel="stylesheet" href="css/style.css">
+  <!-- Include jsPDF Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+  <!-- Toggle Sidebar Button -->
+  <button id="toggleSidebarButton" onclick="toggleSidebar()">☰</button>
+  <!-- Theme Toggle Button -->
+  <button id="themeToggle" onclick="toggleTheme()">Switch Theme</button>
+
+  <!-- Sidebar Navigation -->
+  <nav class="sidebar">
+    <ul id="subjectList">
+      <!-- Calendar link will be added dynamically -->
+    </ul>
+    <!-- Notebooks Display -->
+    <div id="notebooksContainer" class="notebooks-container">
+      <!-- Notebooks will be displayed here -->
+    </div>
+    <!-- New Notebook Button -->
+    <button onclick="openCreateNotebookModal()" style="width: 100%; padding: 15px; margin-top: 10px;">New Notebook</button>
+  </nav>
+
+  <!-- Main Content Area -->
+  <div class="content">
+    <h1 id="subjectTitle">Welcome</h1>
+
+    <!-- Centered Toolbar -->
+    <div id="toolbar" class="toolbar" style="display: none;">
+      <button onclick="setTool('pen')">Pen</button>
+      <button onclick="setTool('eraser')">Eraser</button>
+      <button onclick="setTool('text')">Text</button>
+      <button onclick="setTool('highlighter')">Highlighter</button>
+      <input type="color" id="colorPicker" onchange="addCustomColor(this.value)">
+      <input type="range" id="brushSize" min="1" max="20" value="5" onchange="setBrushSize(this.value)">
+      <!-- Color Palette -->
+      <div id="colorPalette" class="color-palette"></div>
+      <!-- Undo Redo Buttons -->
+      <button onclick="undo()">Undo</button>
+      <button onclick="redo()">Redo</button>
+      <!-- Export Buttons -->
+      <button onclick="exportAsImage()">Export as Image</button>
+      <button onclick="exportAsPDF()">Export as PDF</button>
+    </div>
+
+    <!-- Canvas Area -->
+    <div id="contentArea">
+      <p>Select a notebook from the sidebar to start taking notes.</p>
+    </div>
+
+    <!-- Pagination Control -->
+    <div class="pagination-container" style="display: none;">
+      <button onclick="prevPage()">Previous</button>
+      <button class="add-page" onclick="addPage()">Add New Page</button>
+      <button onclick="nextPage()">Next</button>
+      <span>Page <span id="currentPage">1</span></span>
+    </div>
+  </div>
+
+  <!-- Create Notebook Modal -->
+  <div id="createNotebookModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeCreateNotebookModal()">&times;</span>
+      <h2>Create New Notebook</h2>
+      <label for="notebookName">Notebook Name:</label>
+      <input type="text" id="notebookName" placeholder="Enter notebook name">
+      <label for="paperType">Paper Type:</label>
+      <select id="paperType">
+        <option value="plain">Plain</option>
+        <option value="lined">Lined</option>
+        <option value="grid">Grid</option>
+      </select>
+      <button onclick="createNotebook()">Create</button>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
